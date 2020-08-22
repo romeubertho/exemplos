@@ -2,7 +2,7 @@
 
 ## Objetivo
 
-Repositório com variados exemplos de monorepo, Relay, GraphQL, Docker, React.js, Node.js, TypeScript, entre outros.
+Repositório com variados exemplos de Monorepo, Relay, GraphQL, Docker, React.js, React Native, Node.js, TypeScript, entre outros.
 
 ## Exemplos
 
