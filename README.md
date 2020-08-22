@@ -7,6 +7,7 @@ Repositório com variados exemplos de monorepo, Relay, GraphQL, Docker, React.js
 ## Exemplos
 
 - [React Native - Monorepo](https://github.com/enfase/exemplos/tree/react-native-monorepo)
+- [React, Node & Postgres - Monorepo](https://github.com/enfase/exemplos/tree/react-node-postgres-monorepo)
 
 ## Contribuidores
 
