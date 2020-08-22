@@ -1,13 +1,30 @@
-# Exemplos
+# :rocket: Monorepo - React, Node and Postgres
 
-## Objetivo
+## :exclamation: Requirements
 
-Repositório com variados exemplos de monorepo, Relay, GraphQL, Docker, React.js, Node.js, TypeScript, entre outros.
+- Docker
+- Node (12.18.3)
+- Yarn
 
-## Exemplos
+## :computer: Commands
 
-- [React Native - Monorepo](https://github.com/enfase/exemplos/tree/react-native-monorepo)
+- `yarn install-dependencies`: Install workspace dependencies using Node 12.18.3 (or just `yarn install`)
+- `yarn start`: Start project (`docker-compose up -d`)
+- `yarn stop`: Stop project (`docker-compose down`)
 
-## Contribuidores
+## :blue_heart: VSCode extensions
 
-<a href="https://github.com/lucasgdb"><img src="https://avatars3.githubusercontent.com/u/13838273?v=4" title="lucasgdb" width="80" height="80"></a>
+- Docker
+- ESLint
+- Prisma
+- Error Lens
+- Import Cost
+- Color Highlight
+- Auto Rename Tag
+- vscode-styled-components
+- EditorConfig for VS Code
+- Visual Studio IntelliCode
+- Prettier - Code Formatter
+- GitLens - Git supercharged
+- Dracula Official (opcional)
+- Material Icon Theme (opcional)

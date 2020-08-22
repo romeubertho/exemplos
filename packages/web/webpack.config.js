@@ -1,0 +1,45 @@
+const path = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin')
+
+const isDevelopment = process.env.NODE_ENV !== 'production'
+
+module.exports = {
+  mode: isDevelopment ? 'development' : 'production',
+  resolve: {
+    extensions: ['.tsx', '.ts', '.js'],
+    alias: {
+      '~': path.resolve(__dirname, 'src')
+    }
+  },
+  entry: path.resolve(__dirname, 'src', 'index.tsx'),
+  module: {
+    rules: [
+      {
+        test: /\.(js|ts|tsx)$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader'
+        }
+      }
+    ]
+  },
+  devServer: {
+    contentBase: path.join(__dirname, 'public'),
+    historyApiFallback: true,
+    hot: true,
+    port: 4000,
+    inline: true,
+    host: '0.0.0.0'
+  },
+  output: {
+    path: path.resolve(__dirname, 'build'),
+    filename: 'bundle.js'
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, 'public', 'index.html')
+    }),
+    isDevelopment && new ReactRefreshWebpackPlugin()
+  ].filter(Boolean)
+}

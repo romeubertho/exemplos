@@ -1,0 +1,52 @@
+{
+  "name": "@template/server",
+  "version": "1.0.0",
+  "license": "ISC",
+  "scripts": {
+    "dev": "yarn prisma:migrate:up && dotenv -e .env -- tsnd -r tsconfig-paths/register --ignore node_modules,build --transpile-only --no-notify --respawn src/index.ts",
+    "start": "yarn prisma:migrate:up && dotenv -e .env node build/index.js",
+    "build": "babel src --extensions \".ts\" --out-dir build --no-copy-ignored",
+    "test": "jest",
+    "prisma:generate": "prisma generate",
+    "prisma:introspect": "dotenv -e .env prisma introspect",
+    "prisma:migrate:save": "dotenv -e .env -- prisma migrate save --experimental",
+    "prisma:migrate:up": "dotenv -e .env -- prisma migrate up --experimental",
+    "prisma:studio": "dotenv -e .env -- prisma studio --experimental"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "yarn test --findRelatedTests",
+      "prettier --write",
+      "eslint --fix"
+    ]
+  },
+  "dependencies": {
+    "@prisma/client": "^2.4.1",
+    "compression": "^1.7.4",
+    "cors": "^2.8.5",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.10.5",
+    "@babel/core": "^7.10.5",
+    "@babel/preset-env": "^7.10.4",
+    "@babel/preset-typescript": "^7.10.4",
+    "@prisma/cli": "^2.4.1",
+    "@types/compression": "^1.7.0",
+    "@types/cors": "^2.8.7",
+    "@types/express": "^4.17.7",
+    "@types/node": "^14.0.27",
+    "babel-plugin-module-resolver": "^4.0.0",
+    "babel-preset-minify": "^0.5.1",
+    "dotenv-cli": "^3.2.0",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.11",
+    "ts-node-dev": "^1.0.0-pre.57",
+    "tsconfig-paths": "^3.9.0"
+  }
+}

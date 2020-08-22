@@ -1,0 +1,30 @@
+name: Build & Deploy Server (Production)
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'packages/server/**'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.18.3
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Run tests
+        run: yarn test
+
+      - name: Deploy
+        run: echo "Deployed"
