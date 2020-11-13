@@ -1,0 +1,43 @@
+const logger = require("../Utils/Logger");
+/**
+ * @typedef {Object} UserController
+ * @property {function(req: Request, res: Response)} createUserAction
+ */
+
+/**
+ * @param {UserService} userService
+ * @returns {UserController}
+ */
+function UserController(userService) {
+  return {
+    /**
+     * @param {Request} req
+     * @param {Response} res
+     */
+    createUserAction({ body }, res) {
+      logger.trace("Entered UserController::createUserAction", body);
+      return userService
+        .createUser(body)
+        .then((userInfo) => {
+          logger.debug(
+            "UserController::createUserAction successfully created",
+            { email: userInfo.email }
+          );
+          return res.status(200).json({
+            message: "User created",
+            responseObject: { user: userInfo },
+          });
+        })
+        .catch((error) => {
+          logger.error("UserController::createUserAction error", {
+            message: error.message,
+          });
+          return res
+            .status(500)
+            .json({ message: "Error creating user", error: error.message });
+        });
+    },
+  };
+}
+
+module.exports = UserController;

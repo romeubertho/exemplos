@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  manager-service:
+    build: ../service
+    ports:
+      - 8081:80
+    links:
+      - mongo-database:manager-database
+    working_dir: /usr/src/app
+    command: nodemon -L app.js
+    volumes:
+      - ../service:/usr/src/app
+    depends_on:
+      - mongo-database
+
+  mongo-database:
+      image: mongo:latest
+      volumes:
+        - ../databases/mongodb:/data/db
+        - ../scripts:/scripts
+      ports:
+        - "27017:27017"
