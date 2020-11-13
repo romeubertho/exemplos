@@ -40,6 +40,19 @@ if (
   );
 }
 
+if (
+  orderCalculation([{ price: 200, quantity: 10 }], "land", "blackFriday") !==
+  150
+) {
+  throw new Error("NOVO TESTE: Happy path simples, um produto com cupon");
+}
+
+if (orderCalculation([{ price: 200, quantity: 100 }], "overseas") !== 290) {
+  throw new Error(
+    "NOVO TESTE: Happy path, produto com desconto de quantidade e acrescimo de shipping "
+  );
+}
+
 // Casos de erros
 
 try {
@@ -61,4 +74,44 @@ if (
   )
 ) {
   throw new Error("Wrong path, primeiro objeto não tendo campo price");
+}
+
+try {
+  orderCalculation([{ price: 1500, quantity: 1 }], "land", "anyInvalidCoupon");
+
+  throw new Error("NOVO TESTE: Wrong path, cupon inválido");
+} catch (e) {
+  if (e.message !== "Invalid value for 'cupon'") {
+    throw new Error("NOVO TESTE: Wrong path, cupon inválido");
+  }
+}
+
+try {
+  orderCalculation([{ price: 1500, quantity: 1 }], "airline");
+
+  throw new Error("NOVO TESTE: Wrong path, shipping com valor indisponível");
+} catch (e) {
+  if (e.message !== "Invalid value for 'shippingType'") {
+    throw new Error("NOVO TESTE: Wrong path, shipping com valor indisponível");
+  }
+}
+
+try {
+  orderCalculation([{ price: -1500, quantity: 1 }]);
+
+  throw new Error("NOVO TESTE: Wrong path, produto com preço negativo");
+} catch (e) {
+  if (e.message !== "Invalid negative value for 'price'") {
+    throw new Error("NOVO TESTE: Wrong path, produto com preço negativo");
+  }
+}
+
+try {
+  orderCalculation([{ price: 1500, quantity: -1 }]);
+
+  throw new Error("NOVO TESTE: Wrong path, produto com quantidade negativa");
+} catch (e) {
+  if (e.message !== "Invalid negative value for 'quantity'") {
+    throw new Error("NOVO TESTE: Wrong path, produto com quantidade negativa");
+  }
 }
