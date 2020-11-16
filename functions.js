@@ -10,11 +10,11 @@ const findCouponDiscount = (coupon) =>
   couponPriceMap[coupon] || defaultDiscount;
 
 const orderCalculation = (products, shippingType = "land", coupon) => {
+  const extraCosts = [];
   const productsTotal = products.reduce(
     (acc, currentProduct) => acc + currentProduct.price,
     0
   );
-  const extraCosts = [];
 
   if (coupon) {
     const discount = findCouponDiscount(coupon);
@@ -28,16 +28,15 @@ const orderCalculation = (products, shippingType = "land", coupon) => {
   });
 
   if (shippingType === "overseas") {
-    let overseasShippingCost = 100;
-    if (products.length >= 4) {
-      overseasShippingCost = 300;
-    }
-    extraCosts.push(overseasShippingCost);
+    extraCosts.push(products.length >= 4 ? 300 : 100);
   }
-  return extraCosts.reduce(
+
+  const totalCosts = extraCosts.reduce(
     (acc, extraCosts) => acc + extraCosts,
     productsTotal
   );
+
+  return totalCosts;
 };
 
 const calculateOrderCancel = () => {};

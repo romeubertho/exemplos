@@ -29,6 +29,7 @@ if (
     "Happy path simples, 4 produtos com acrescimo de shipping maior"
   );
 }
+
 if (
   orderCalculation([
     { price: 200, quantity: 100 },
@@ -37,6 +38,28 @@ if (
 ) {
   throw new Error(
     "Happy path, dois produto com desconto de quantidade em um deles"
+  );
+}
+
+if (
+  orderCalculation([
+    { price: 200, quantity: 100 },
+    { price: 1500, quantity: 1 },
+  ]) !== 1690
+) {
+  throw new Error(
+    "NOVO TESTE: Happy path, dois produto com desconto de quantidade em um deles"
+  );
+}
+
+if (
+  orderCalculation([
+    { price: 200, quantity: 100 },
+    { price: 1500, quantity: 1 },
+  ]) !== 1690
+) {
+  throw new Error(
+    "NOVO TESTE: Happy path, dois produto com desconto de quantidade em um deles"
   );
 }
 
@@ -49,6 +72,26 @@ try {
 } catch (e) {
   if (e.message !== "Cannot read property 'price' of null") {
     throw new Error("Wrong path, primeiro objeto sendo null");
+  }
+}
+
+try {
+  orderCalculation(null);
+
+  throw new Error("NOVO TESTE: Wrong path, array sendo null");
+} catch (e) {
+  if (e.message !== "Cannot read property 'reduce' of null") {
+    throw new Error("NOVO TESTE: Wrong path, array sendo null");
+  }
+}
+
+try {
+  orderCalculation({ price: 1500, quantity: 1 });
+
+  throw new Error("NOVO TESTE: Wrong path, array sendo objeto");
+} catch (e) {
+  if (e.message !== "products.reduce is not a function") {
+    throw new Error("NOVO TESTE: Wrong path, array sendo objeto");
   }
 }
 
