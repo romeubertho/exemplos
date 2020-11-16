@@ -93,22 +93,33 @@ const sumOfPurchaseFines = (purchaseFines) =>
 
 const getTotalFine = (purchaseFines) => {
   const sumFine = sumOfPurchaseFines(purchaseFines);
+
+  if (isNaN(sumFine)) {
+    return sumFine;
+  }
+
   return sumFine > MINIMUM_PURCHASE_FINE ? sumFine : MINIMUM_PURCHASE_FINE;
 };
 
 const getFineForEachProduct = (products, purchaseDayCount) => {
   const finePercentage = purchaseDayCount > 30 ? 0.6 : 0.2;
 
-  return products.reduce(
-    (acc, product) => acc + product.price * finePercentage,
-    0
-  );
+  return products.reduce((acc, product) => {
+    if (isNaN(product.price) || product.price < 0) {
+      throw new Error("Invalid 'price' value");
+    }
+    return acc + product.price * finePercentage;
+  }, 0);
 };
 
 const getFineByNumberOfProducts = (numberOfProducts) =>
   numberOfProducts > 4 ? (numberOfProducts - 4) * 20 : 0;
 
 const calculateOrderCancel = (products, purchaseDayCount, usedCoupon) => {
+  if (!purchaseDayCount) {
+    throw new Error("Invalid 'purchaseDayCount' value");
+  }
+
   const purchaseFines = [];
 
   const finesBasedOnProductPrice = getFineForEachProduct(
@@ -123,7 +134,10 @@ const calculateOrderCancel = (products, purchaseDayCount, usedCoupon) => {
   );
   purchaseFines.push(finesBaseOnǸumberOfProducts);
 
-  return getTotalFine(purchaseFines);
+  const result = getTotalFine(purchaseFines);
+
+  console.log({ purchaseFines, result });
+  return result;
 };
 
 module.exports = {

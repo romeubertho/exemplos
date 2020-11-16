@@ -71,12 +71,48 @@ if (
 
 // Casos de erros
 
-// try {
-//     calculateOrderCancel([null, { price: 1500, quantity: 1 }]);
+try {
+  calculateOrderCancel([null, { price: 100, quantity: 10 }], 7);
 
-//     throw new Error("Wrong path, primeiro objeto sendo null");
-//   } catch (e) {
-//     if (e.message !== "Cannot read property 'price' of null") {
-//       throw new Error("Wrong path, primeiro objeto sendo null");
-//     }
-//   }
+  throw new Error("Wrong path, primeiro objeto sendo null");
+} catch (e) {
+  if (e.message !== "Cannot read property 'price' of null") {
+    throw new Error("Wrong path, primeiro objeto sendo null");
+  }
+}
+
+try {
+  calculateOrderCancel(
+    [
+      { value: 1234, quantity: 12 },
+      { price: 1500, quantity: 1 },
+    ],
+    7
+  );
+
+  throw new Error("Wrong path, primeiro objeto não tendo campo price");
+} catch (e) {
+  if (e.message !== "Invalid 'price' value") {
+    throw new Error("Wrong path, primeiro objeto não tendo campo price");
+  }
+}
+
+try {
+  calculateOrderCancel([{ price: -100, quantity: 1 }], 7);
+
+  throw new Error("Wrong path, valor negativo para price");
+} catch (e) {
+  if (e.message !== "Invalid 'price' value") {
+    throw new Error("Wrong path, valor negativo para price");
+  }
+}
+
+try {
+  calculateOrderCancel([{ price: 100, quantity: 1 }]);
+
+  throw new Error("Wrong path, valor indefinido  para purchaseDayCount");
+} catch (e) {
+  if (e.message !== "Invalid 'purchaseDayCount' value") {
+    throw new Error("Wrong path, valor indefinido  para purchaseDayCount");
+  }
+}
