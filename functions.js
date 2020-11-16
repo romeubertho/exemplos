@@ -86,7 +86,45 @@ const orderCalculation = (products, shippingType = "land", coupon) => {
   );
 };
 
-const calculateOrderCancel = () => {};
+const MINIMUM_PURCHASE_FINE = 50;
+
+const sumOfPurchaseFines = (purchaseFines) =>
+  purchaseFines.reduce((acc, curFine) => acc + curFine, 0);
+
+const getTotalFine = (purchaseFines) => {
+  const sumFine = sumOfPurchaseFines(purchaseFines);
+  return sumFine > MINIMUM_PURCHASE_FINE ? sumFine : MINIMUM_PURCHASE_FINE;
+};
+
+const getFineForEachProduct = (products, purchaseDayCount) => {
+  const finePercentage = purchaseDayCount > 30 ? 0.6 : 0.2;
+
+  return products.reduce(
+    (acc, product) => acc + product.price * finePercentage,
+    0
+  );
+};
+
+const getFineByNumberOfProducts = (numberOfProducts) =>
+  numberOfProducts > 4 ? (numberOfProducts - 4) * 20 : 0;
+
+const calculateOrderCancel = (products, purchaseDayCount, usedCoupon) => {
+  const purchaseFines = [];
+
+  const finesBasedOnProductPrice = getFineForEachProduct(
+    products,
+    purchaseDayCount
+  );
+  purchaseFines.push(finesBasedOnProductPrice);
+
+  const numberOfProducts = products.length;
+  const finesBaseOnǸumberOfProducts = getFineByNumberOfProducts(
+    numberOfProducts
+  );
+  purchaseFines.push(finesBaseOnǸumberOfProducts);
+
+  return getTotalFine(purchaseFines);
+};
 
 module.exports = {
   orderCalculation,
