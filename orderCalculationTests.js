@@ -3,15 +3,15 @@ const { orderCalculation } = require("./functions");
 // Casos de Sucesso
 
 if (orderCalculation([{ price: 200, quantity: 10 }]) !== 200) {
-  throw new Error("Happy path simples, um produto sem desconto");
+  throw new Error("Happy path simples, 1 produto sem desconto");
 }
 
 if (orderCalculation([{ price: 200, quantity: 100 }]) !== 190) {
-  throw new Error("Happy path simples, um produto com desconto de quantidade");
+  throw new Error("Happy path simples, 1 produto com desconto de quantidade");
 }
 
 if (orderCalculation([{ price: 200, quantity: 10 }], "overseas") !== 300) {
-  throw new Error("Happy path simples, um produto com acrescimo de shipping");
+  throw new Error("Happy path simples, 1 produto com acrescimo de shipping");
 }
 
 if (
@@ -37,29 +37,31 @@ if (
   ]) !== 1690
 ) {
   throw new Error(
-    "Happy path, dois produto com desconto de quantidade em um deles"
+    "Happy path, 2 produtos com desconto de quantidade em um deles"
   );
 }
 
 if (
-  orderCalculation([
-    { price: 200, quantity: 100 },
-    { price: 1500, quantity: 1 },
-  ]) !== 1690
+  orderCalculation(
+    [
+      { price: 200, quantity: 100 },
+      { price: 1500, quantity: 1 },
+    ],
+    "overseas",
+    "blackFriday"
+  ) !== 1740
 ) {
   throw new Error(
-    "NOVO TESTE: Happy path, dois produto com desconto de quantidade em um deles"
+    "NOVO TESTE: Happy path, 2 produtos com desconto de quantidade em um deles com acréscimo de shipping maior e com desconto de black friday"
   );
 }
 
 if (
-  orderCalculation([
-    { price: 200, quantity: 100 },
-    { price: 1500, quantity: 1 },
-  ]) !== 1690
+  orderCalculation([{ price: 200, quantity: 10 }], "land", "inverseCoupon") !==
+  220
 ) {
   throw new Error(
-    "NOVO TESTE: Happy path, dois produto com desconto de quantidade em um deles"
+    "NOVO TESTE: Happy path, 1 produto sem desconto mas com cupom inverso"
   );
 }
 

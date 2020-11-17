@@ -39,7 +39,28 @@ const orderCalculation = (products, shippingType = "land", coupon) => {
   return totalCosts;
 };
 
-const calculateOrderCancel = () => {};
+const calculateOrderCancel = (products, purchaseDayCount, usedCoupon) => {
+  let pricePenalty = 50;
+
+  if (products.length > 4) {
+    pricePenalty += products.length * 20;
+  }
+
+  products.forEach((product) => {
+    if (purchaseDayCount > 30) {
+      pricePenalty += product.price * 0.6;
+    } else {
+      pricePenalty += product.price * 0.2;
+    }
+  });
+
+  if (usedCoupon) {
+    const discount = findCouponDiscount(usedCoupon);
+    pricePenalty += discount;
+  }
+
+  return pricePenalty;
+};
 
 module.exports = {
   orderCalculation,
