@@ -40,6 +40,38 @@ if (
   );
 }
 
+if (
+  orderCalculation(
+    [
+      { price: 200, quantity: 100 },
+      { price: 1500, quantity: 1 },
+    ],
+    "land",
+    "inverseCoupon"
+  ) !== 1710
+) {
+  throw new Error(
+    "Happy path, dois produto com desconto de quantidade em um deles e acréscimo de 20 do inverseCoupon"
+  );
+}
+
+if (
+  orderCalculation(
+    [
+      { price: 200, quantity: 100 },
+      { price: 200, quantity: 100 },
+      { price: 200, quantity: 100 },
+      { price: 200, quantity: 100 },
+    ],
+    "overseas",
+    "couponThatDoesNotExist"
+  ) !== 1055
+) {
+  throw new Error(
+    "Happy path simples, 4 produtos com acrescimo de shipping maior, com desconto de quantidade em todos e defaultCoupon"
+  );
+}
+
 // Casos de erros
 
 try {
@@ -50,6 +82,22 @@ try {
   if (e.message !== "Cannot read property 'price' of null") {
     throw new Error("Wrong path, primeiro objeto sendo null");
   }
+}
+
+try {
+  orderCalculation();
+
+  throw new Error("Wrong path, primeiro parâmetro sendo undefined");
+} catch (e) {
+  if (e.message !== "Cannot read property 'reduce' of undefined") {
+    throw new Error("Wrong path, primeiro parâmetro sendo undefined");
+  }
+}
+
+if (
+  typeof orderCalculation([{ price: "duzentos" }, { price: 100 }]) === "Number"
+) {
+  throw new Error("Wrong path, price não é Number");
 }
 
 if (

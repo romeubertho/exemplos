@@ -40,7 +40,26 @@ const orderCalculation = (products, shippingType = "land", coupon) => {
   );
 };
 
-const calculateOrderCancel = () => {};
+const getPercentageReducer = (percentage) => (acc, currentProduct) =>
+  acc + percentage * currentProduct.price;
+
+const twentyPercentReducer = getPercentageReducer(0.2);
+const sixtyPercentReducer = getPercentageReducer(0.6);
+
+const calculateOrderCancel = (products, purchasedDayCount, usedCoupon) => {
+  const manyItemsExtraFee = products.length > 4 ? products.length * 20 : 0;
+
+  const reducer =
+    purchasedDayCount > 30 ? sixtyPercentReducer : twentyPercentReducer;
+
+  const totalCancellingFee = products.reduce(reducer, manyItemsExtraFee);
+
+  if (Number.isNaN(totalCancellingFee)) {
+    return NaN;
+  }
+
+  return totalCancellingFee > 50 ? totalCancellingFee : 50;
+};
 
 module.exports = {
   orderCalculation,
