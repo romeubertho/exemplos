@@ -6,8 +6,12 @@ const couponPriceMap = {
 
 const defaultDiscount = -5;
 
-const findCouponDiscount = (coupon) =>
-  couponPriceMap[coupon] || defaultDiscount;
+const findCouponDiscount = (coupon) => {
+  if (!couponPriceMap[coupon]) {
+    throw new Error("Cupom inválido");
+  }
+  return couponPriceMap[coupon] || defaultDiscount;
+};
 
 const orderCalculation = (products, shippingType = "land", coupon) => {
   const productsTotal = products.reduce(
@@ -40,7 +44,27 @@ const orderCalculation = (products, shippingType = "land", coupon) => {
   );
 };
 
-const calculateOrderCancel = () => {};
+const calculateOrderCancel = (products, purchaseDayCount, usedCoupon) => {
+  const fine = [];
+
+  if (products.length > 4) {
+    const fineProducts = products.length - 4;
+    fine.push(fineProducts * 20);
+  }
+
+  fine.push(
+    products.reduce(
+      (acc, products) =>
+        acc +
+        (purchaseDayCount < 30 ? products.price * 0.2 : products.price * 0.6),
+      0
+    )
+  );
+
+  const fineValue = fine.reduce((acc, extraCosts) => acc + extraCosts, 0);
+
+  return fineValue > 50 ? fineValue : 50;
+};
 
 module.exports = {
   orderCalculation,

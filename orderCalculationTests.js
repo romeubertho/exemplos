@@ -40,6 +40,36 @@ if (
   );
 }
 
+if (
+  orderCalculation(
+    [
+      { price: 200, quantity: 2 },
+      { price: 300, quantity: 1 },
+    ],
+    null,
+    "blackFriday"
+  ) !== 450
+) {
+  throw new Error(
+    "NOVO TESTE: Happy path, dois produtos com desconto de cupon Black Friday"
+  );
+}
+
+if (
+  orderCalculation(
+    [
+      { price: 200, quantity: 2 },
+      { price: 300, quantity: 1 },
+    ],
+    null,
+    "inverseCoupon"
+  ) !== 520
+) {
+  throw new Error(
+    "NOVO TESTE: Happy path, dois produtos com acréscimo de valor por cupon inverso"
+  );
+}
+
 // Casos de erros
 
 try {
@@ -61,4 +91,31 @@ if (
   )
 ) {
   throw new Error("Wrong path, primeiro objeto não tendo campo price");
+}
+
+try {
+  orderCalculation(
+    [
+      { price: 200, quantity: 2 },
+      { price: 300, quantity: 1 },
+    ],
+    null,
+    "invalidCoupon"
+  );
+
+  throw new Error("NOVO TESTE: Wrong path, cupom invalido");
+} catch (e) {
+  if (e.message !== "Cupom inválido") {
+    throw new Error("NOVO TESTE: Wrong path, cupom invalido");
+  }
+}
+
+try {
+  orderCalculation({ price: 1400, quantity: 2 });
+
+  throw new Error("NOVO TESTE: Wrong path, produto fora de um array");
+} catch (e) {
+  if (e.message !== "products.reduce is not a function") {
+    throw new Error("NOVO TESTE: Wrong path, produto fora de um array");
+  }
 }
