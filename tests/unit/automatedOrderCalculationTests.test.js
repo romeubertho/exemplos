@@ -1,26 +1,24 @@
 const { expect, describe, test } = require("@jest/globals");
 const { orderCalculation } = require("../../functions");
+const ProductFixtures = require("../fixture/ProductFixtures");
 
 describe("orderCalculation Happy Paths", () => {
+  const { simpleProduct } = ProductFixtures;
   test("One product without discount", () => {
-    const orderValue = orderCalculation([{ price: 200, quantity: 10 }]);
+    const orderValue = orderCalculation([simpleProduct]);
     expect(orderValue).toBe(200);
   });
   test("Two products with quantity discount in one of them", () => {
+    const { productWithOneHundredQuantity } = ProductFixtures;
     const orderValue = orderCalculation([
-      { price: 200, quantity: 100 },
-      { price: 1500, quantity: 1 },
+      productWithOneHundredQuantity,
+      { ...simpleProduct, price: 1500 },
     ]);
     expect(orderValue).toBe(1690);
   });
   test("Many products with shipping pricing", () => {
     const orderValue = orderCalculation(
-      [
-        { price: 200, quantity: 10 },
-        { price: 200, quantity: 10 },
-        { price: 200, quantity: 10 },
-        { price: 200, quantity: 10 },
-      ],
+      [simpleProduct, simpleProduct, simpleProduct, simpleProduct],
       "overseas"
     );
     expect(orderValue).toBe(1100);
@@ -28,15 +26,17 @@ describe("orderCalculation Happy Paths", () => {
 });
 
 describe("orderCalculation Wrong Paths", () => {
+  const { simpleProduct } = ProductFixtures;
   test("Pass product being null should cause an error", () => {
     const expectedError = new Error("Cannot read property 'price' of null");
-    expect(() =>
-      orderCalculation([null, { price: 1500, quantity: 1 }])
-    ).toThrowError(expectedError);
+    expect(() => orderCalculation([null, simpleProduct])).toThrowError(
+      expectedError
+    );
   });
   test("Pass product without 'price' field returns NaN", () => {
+    const { productWithoutPrice } = ProductFixtures;
     const expectedNaN = orderCalculation([
-      { value: 1234, quantity: 12 },
+      productWithoutPrice,
       { price: 1500, quantity: 1 },
     ]);
     expect(expectedNaN).toBeNaN();
