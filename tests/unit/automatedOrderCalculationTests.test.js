@@ -35,10 +35,7 @@ describe("orderCalculation Wrong Paths", () => {
   });
   test("Pass product without 'price' field returns NaN", () => {
     const { productWithoutPrice } = ProductFixtures;
-    const expectedNaN = orderCalculation([
-      productWithoutPrice,
-      { price: 1500, quantity: 1 },
-    ]);
+    const expectedNaN = orderCalculation([productWithoutPrice, simpleProduct]);
     expect(expectedNaN).toBeNaN();
   });
 });
