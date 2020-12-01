@@ -40,10 +40,10 @@ const orderCalculation = (products, shippingType = "land", coupon) => {
 };
 
 const calculateOrderCancel = (products, purchaseDayCount, usedCoupon) => {
-  let pricePenalty = 50;
+  let pricePenalty = 0;
 
   if (products.length > 4) {
-    pricePenalty += products.length * 20;
+    pricePenalty += (products.length - 4) * 20;
   }
 
   products.forEach((product) => {
@@ -54,9 +54,8 @@ const calculateOrderCancel = (products, purchaseDayCount, usedCoupon) => {
     }
   });
 
-  if (usedCoupon) {
-    const discount = findCouponDiscount(usedCoupon);
-    pricePenalty += discount;
+  if (pricePenalty < 50) {
+    pricePenalty = 50;
   }
 
   return pricePenalty;

@@ -2,7 +2,7 @@ const { calculateOrderCancel } = require("./functions");
 
 // Casos de Sucesso
 
-if (calculateOrderCancel([{ price: 100, quantity: 5 }]) !== 70) {
+if (calculateOrderCancel([{ price: 100, quantity: 5 }]) !== 50) {
   throw new Error("Happy path: 1 produto sendo cancelado");
 }
 
@@ -13,7 +13,7 @@ if (
     { price: 100, quantity: 5 },
     { price: 100, quantity: 5 },
     { price: 100, quantity: 5 },
-  ]) !== 250
+  ]) !== 120
 ) {
   throw new Error("Happy path: mais de 4 produtos diferentes sendo cancelados");
 }
@@ -25,7 +25,7 @@ if (
       { price: 100, quantity: 5 },
     ],
     31
-  ) !== 170
+  ) !== 120
 ) {
   throw new Error(
     "Happy path: 2 produtos diferentes sendo cancelados com mais de 30 dias de compra"
@@ -42,7 +42,7 @@ if (
       { price: 100, quantity: 5 },
     ],
     31
-  ) !== 450
+  ) !== 320
 ) {
   throw new Error(
     "Happy path: mais de 4 produtos diferentes sendo cancelados com mais de 30 dias de compra"
