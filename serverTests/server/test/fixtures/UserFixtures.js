@@ -1,13 +1,13 @@
-const CardFixtures = {};
+const UserFixtures = {};
 
-CardFixtures.defaultRequestBody = {
+UserFixtures.defaultRequestBody = {
   name: "Jeffzitos",
   lastname: "Tusqueira",
   email: "jeffzitos@tusca.com.br",
   gender: "descubra",
 };
 
-CardFixtures.defaultUser = {
+UserFixtures.defaultUser = {
   name: "Jeffzitos",
   lastname: "Tusqueira",
   email: "jeffzitos@tusca.com.br",
@@ -16,4 +16,4 @@ CardFixtures.defaultUser = {
   updatedAt: "2018-10-10T00:00:00.000Z",
 };
 
-module.exports = CardFixtures;
+module.exports = UserFixtures;
