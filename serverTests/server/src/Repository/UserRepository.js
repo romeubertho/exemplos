@@ -27,11 +27,9 @@ function UserRepository(userModel) {
       } catch (error) {
         logger.error(
           "UserRepository::createUser error trying to save user doc.",
-          error
+          `Error: ${error.message}`
         );
-        throw new CommunicationError(
-          `Error trying to save card doc. Error: ${error}`
-        );
+        throw new CommunicationError(`Error trying to save user doc. ${error}`);
       }
     },
   };
