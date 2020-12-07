@@ -12,17 +12,19 @@ suite("UserController", () => {
   let userService;
   /** @var {UserCOntroller} userController */
   let userController;
+
+  let controllerUtilsStub;
   beforeEach(() => {
     userService = UserServiceFactory();
-    userController = UserControllerFactory(userService);
+    controllerUtilsStub = { validateCreateUserBody: sinon.stub() };
+    userController = UserControllerFactory(userService, controllerUtilsStub);
   });
   afterEach(() => {
     sinon.restore();
   });
   suite("createUserAction", () => {
-    const { defaultUser } = UserFixtures;
+    const { defaultUser, defaultRequestBody } = UserFixtures;
     test("if passing full body works correctly", (done) => {
-      const { defaultRequestBody } = UserFixtures;
       const request = httpMock.createRequest({
         method: "POST",
         url: "/users",
@@ -32,6 +34,10 @@ suite("UserController", () => {
 
       const createUserStub = sinon.stub(userService, "createUser");
       createUserStub.withArgs(defaultRequestBody).resolves(defaultUser);
+
+      controllerUtilsStub.validateCreateUserBody
+        .withArgs(defaultRequestBody)
+        .returns({ containErrors: false });
 
       userController.createUserAction(request, response);
 
@@ -43,13 +49,13 @@ suite("UserController", () => {
           responseObject: { user: defaultUser },
         };
         expect(JSON.parse(response._getData())).to.eql(responseBody);
-        console.log("a");
+        sinon.assert.calledOnce(controllerUtilsStub.validateCreateUserBody);
         sinon.assert.calledOnce(createUserStub);
 
         done();
       });
     });
-    test("if throwing an error is caught correctly", (done) => {
+    test("if userService throwing an error is caught correctly", (done) => {
       const error = new Error("Error trying to save user");
       const request = httpMock.createRequest({
         method: "POST",
@@ -61,6 +67,10 @@ suite("UserController", () => {
       const createUserStub = sinon.stub(userService, "createUser");
       createUserStub.withArgs({}).rejects(error);
 
+      controllerUtilsStub.validateCreateUserBody
+        .withArgs({})
+        .returns({ containErrors: false });
+
       userController.createUserAction(request, response);
 
       response.on("end", () => {
@@ -70,6 +80,7 @@ suite("UserController", () => {
           error: error.message,
         };
         expect(JSON.parse(response._getData())).to.eql(responseBody);
+        sinon.assert.calledOnce(controllerUtilsStub.validateCreateUserBody);
         sinon.assert.calledOnce(createUserStub);
         done();
       });
