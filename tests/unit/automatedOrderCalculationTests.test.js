@@ -117,7 +117,7 @@ describe("orderCalculation Wrong Paths", () => {
     );
   });
 
-  test("Pass product with negative value for 'price' field", () => {
+  test("NEW WRONG PATH TEST: Pass product with negative value for 'price' field", () => {
     const { productWithNegativePricing } = ProductFixtures;
     const expectedError = new Error("Invalid value for 'price'");
     expect(() => orderCalculation([productWithNegativePricing])).toThrowError(
@@ -125,7 +125,7 @@ describe("orderCalculation Wrong Paths", () => {
     );
   });
 
-  test("Pass product with negative value for 'quantity' field", () => {
+  test("NEW WRONG PATH TEST:Pass product with negative value for 'quantity' field", () => {
     const { productWithNegativeQuantity } = ProductFixtures;
     const expectedError = new Error("Invalid value for 'quantity'");
     expect(() => orderCalculation([productWithNegativeQuantity])).toThrowError(
