@@ -22,7 +22,7 @@ const getCouponDiscount = (coupon) => {
 
   const discount = findCouponDiscount(coupon);
   if (!discount) {
-    throw new Error("Invalid value for 'cupon'");
+    throw new Error("Invalid value for 'coupon'");
   }
 
   return discount;
@@ -36,7 +36,7 @@ const isValidShippingType = (shippingType) =>
 const sumProductsPrices = (products) =>
   products.reduce((acc, currentProduct) => {
     if (currentProduct.price < 0) {
-      throw new Error("Invalid negative value for 'price'");
+      throw new Error("Invalid value for 'price'");
     }
     return acc + currentProduct.price;
   }, 0);
@@ -44,7 +44,7 @@ const sumProductsPrices = (products) =>
 const getProductsQuantityDiscount = (products) =>
   products.reduce((acc, currentProduct) => {
     if (currentProduct.quantity < 0) {
-      throw new Error("Invalid negative value for 'quantity'");
+      throw new Error("Invalid value for 'quantity'");
     }
     if (currentProduct.quantity >= 100) {
       return acc - 10;

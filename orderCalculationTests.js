@@ -79,10 +79,10 @@ if (
 try {
   orderCalculation([{ price: 1500, quantity: 1 }], "land", "anyInvalidCoupon");
 
-  throw new Error("NOVO TESTE: Wrong path, cupon inválido");
+  throw new Error("NOVO TESTE: Wrong path, coupon inválido");
 } catch (e) {
-  if (e.message !== "Invalid value for 'cupon'") {
-    throw new Error("NOVO TESTE: Wrong path, cupon inválido");
+  if (e.message !== "Invalid value for 'coupon'") {
+    throw new Error("NOVO TESTE: Wrong path, coupon inválido");
   }
 }
 
@@ -101,7 +101,7 @@ try {
 
   throw new Error("NOVO TESTE: Wrong path, produto com preço negativo");
 } catch (e) {
-  if (e.message !== "Invalid negative value for 'price'") {
+  if (e.message !== "Invalid value for 'price'") {
     throw new Error("NOVO TESTE: Wrong path, produto com preço negativo");
   }
 }
@@ -111,7 +111,7 @@ try {
 
   throw new Error("NOVO TESTE: Wrong path, produto com quantidade negativa");
 } catch (e) {
-  if (e.message !== "Invalid negative value for 'quantity'") {
+  if (e.message !== "Invalid value for 'quantity'") {
     throw new Error("NOVO TESTE: Wrong path, produto com quantidade negativa");
   }
 }
