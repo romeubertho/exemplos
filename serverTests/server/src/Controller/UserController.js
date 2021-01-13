@@ -1,4 +1,5 @@
 const logger = require("../Utils/Logger");
+const BadRequestError = require("../Error/BadRequestError");
 /**
  * @typedef {Object} UserController
  * @property {function(req: Request, res: Response)} createUserAction
@@ -21,7 +22,7 @@ function UserController(userService, userControllerUtils) {
         logger.debug(
           "UserController::createUserAction error validating request info"
         );
-        throw BadRequestError(
+        throw new BadRequestError(
           `The following fields are required and must be not empty strings: ${validationInfo.fieldsWithErrors.join(
             ", "
           )}`
