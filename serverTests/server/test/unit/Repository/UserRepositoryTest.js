@@ -12,6 +12,7 @@ suite("UserRepository", () => {
   beforeEach(() => {
     userModelMock = {
       create: sinon.stub(),
+      update: sinon.stub(),
     };
     userRepository = UserRepository(userModelMock);
   });
@@ -57,6 +58,34 @@ suite("UserRepository", () => {
         );
         sinon.assert.calledOnce(userModelMock.create);
         sinon.assert.calledOnce(userDocMock.save);
+      }
+    );
+  });
+  suite("updateUser", () => {
+    const { defaultUser, updatedUser } = UserFixtures;
+    test("if passing a userInfo tries to update on mongo", (done) => {
+      userModelMock.update.withArgs(defaultUser).resolves(updatedUser);
+
+      userRepository.updateUser(defaultUser).then((response) => {
+        sinon.assert.calledOnce(userModelMock.update);
+        expect(response).to.eql(updatedUser);
+        done();
+      });
+    });
+    test(
+      "if some exception is thrown inside the function they fall into catch and".concat(
+        " throw a CommunicationError"
+      ),
+      () => {
+        const errorMock = new Error("Mama tells me im ok");
+        userModelMock.update.withArgs(defaultUser).throws(errorMock);
+
+        assert.throws(
+          () => userRepository.updateUser(defaultUser),
+          CommunicationError,
+          "Error trying to update user doc. Error: Mama tells me im ok"
+        );
+        sinon.assert.calledOnce(userModelMock.update);
       }
     );
   });

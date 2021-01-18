@@ -144,4 +144,94 @@ suite("UserController", () => {
       }
     });
   });
+  suite("updateUserAction", () => {
+    const { updatedUser, defaultRequestBody } = UserFixtures;
+    test("if passing full body works correctly", (done) => {
+      const request = httpMock.createRequest({
+        method: "PUT",
+        url: "/user",
+        body: defaultRequestBody,
+      });
+      const response = httpMock.createResponse({ eventEmitter: EventEmitter });
+
+      const updateUserStub = sinon.stub(userService, "updateUser");
+      updateUserStub.withArgs(defaultRequestBody).resolves(updatedUser);
+
+      controllerUtilsStub.validateCreateUserBody
+        .withArgs(defaultRequestBody)
+        .returns({ containErrors: false });
+
+      userController.updateUserAction(request, response);
+
+      response.on("end", () => {
+        expect(response.statusCode).to.equal(200);
+
+        const responseBody = {
+          message: "User updated",
+          responseObject: { user: updatedUser },
+        };
+        expect(JSON.parse(response._getData())).to.eql(responseBody);
+        sinon.assert.calledOnce(controllerUtilsStub.validateCreateUserBody);
+        sinon.assert.calledOnce(updateUserStub);
+
+        done();
+      });
+    });
+    test("if userService throwing an error is caught correctly", (done) => {
+      const error = new Error("Error trying to save user");
+      const request = httpMock.createRequest({
+        method: "PUT",
+        url: "/user",
+        body: {},
+      });
+      const response = httpMock.createResponse({ eventEmitter: EventEmitter });
+
+      const updateUserStub = sinon.stub(userService, "updateUser");
+      updateUserStub.withArgs({}).rejects(error);
+
+      controllerUtilsStub.validateCreateUserBody
+        .withArgs({})
+        .returns({ containErrors: false });
+
+      userController.updateUserAction(request, response);
+
+      response.on("end", () => {
+        expect(response.statusCode).to.equal(500);
+        const responseBody = {
+          message: "Error update user",
+          error: error.message,
+        };
+        expect(JSON.parse(response._getData())).to.eql(responseBody);
+        sinon.assert.calledOnce(controllerUtilsStub.validateCreateUserBody);
+        sinon.assert.calledOnce(updateUserStub);
+        done();
+      });
+    });
+    test("should not update an user when request body has fields with error", (done) => {
+      const error = new Error("Error trying to update user");
+      const request = httpMock.createRequest({
+        method: "PUT",
+        url: "/user",
+        body: defaultRequestBody,
+      });
+      const response = httpMock.createResponse({ eventEmitter: EventEmitter });
+
+      controllerUtilsStub.validateCreateUserBody
+        .withArgs(defaultRequestBody)
+        .returns({ containErrors: true, fieldsWithErrors: ["email"] });
+
+      try {
+        userController.updateUserAction(request, response);
+      } catch (err) {
+        expect(err.message).to.equal(
+          "The following fields are required and must be not empty strings: email"
+        );
+
+        const updateUserStub = sinon.stub(userService, "updateUser");
+        updateUserStub.withArgs(defaultRequestBody).rejects(error);
+
+        done();
+      }
+    });
+  });
 });

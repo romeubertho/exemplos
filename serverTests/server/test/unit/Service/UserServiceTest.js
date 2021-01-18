@@ -32,4 +32,18 @@ suite("UserSerive", () => {
       });
     });
   });
+  suite("updateUser", () => {
+    const { defaultRequestBody, updatedUser } = UserFixtures;
+    test("if receiving body with all info being different from empty string, update User", (done) => {
+      const updateUserStub = sinon.stub(userRepository, "updateUser");
+
+      updateUserStub.withArgs(defaultRequestBody).resolves(updatedUser);
+
+      userService.updateUser(defaultRequestBody).then((updatedDoc) => {
+        expect(updatedDoc).to.eql(updatedUser);
+        sinon.assert.calledOnce(updateUserStub);
+        done();
+      });
+    });
+  });
 });

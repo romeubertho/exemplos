@@ -23,6 +23,13 @@ function UserService(userRepository) {
         return savedDoc;
       });
     },
+    async updateUser(userInfo) {
+      logger.trace("Entered UserService::updateUser", userInfo);
+      return userRepository.updateUser(userInfo).then((savedDoc) => {
+        logger.debug("UserService::updatedUser saved user");
+        return savedDoc;
+      });
+    },
   };
 }
 

@@ -49,6 +49,40 @@ function UserController(userService, userControllerUtils) {
             .json({ message: "Error creating user", error: error.message });
         });
     },
+    updateUserAction({ body }, res) {
+      logger.trace("Entered UserController::updateUserAction", body);
+      const validationInfo = userControllerUtils.validateCreateUserBody(body);
+      if (validationInfo.containErrors) {
+        logger.debug(
+          "UserController::updateUserAction error validating request info"
+        );
+        throw new BadRequestError(
+          `The following fields are required and must be not empty strings: ${validationInfo.fieldsWithErrors.join(
+            ", "
+          )}`
+        );
+      }
+      return userService
+        .updateUser(body)
+        .then((userInfo) => {
+          logger.debug(
+            "UserController::updateUserAction successfully updated",
+            { email: userInfo.email }
+          );
+          return res.status(200).json({
+            message: "User updated",
+            responseObject: { user: userInfo },
+          });
+        })
+        .catch((error) => {
+          logger.error("UserController::update UserAction error", {
+            message: error.message,
+          });
+          return res
+            .status(500)
+            .json({ message: "Error update user", error: error.message });
+        });
+    },
   };
 }
 

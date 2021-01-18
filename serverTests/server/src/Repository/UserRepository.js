@@ -32,6 +32,25 @@ function UserRepository(userModel) {
         throw new CommunicationError(`Error trying to save user doc. ${error}`);
       }
     },
+    updateUser(userInfo) {
+      logger.trace("Entered UserRepository::updateUser", userInfo);
+      try {
+        return userModel
+          .update(userInfo)
+          .then((updatedDoc) => {
+            logger.debug("UserRepository::updateUser updated successfully");
+            return updatedDoc;
+          });
+      } catch (error) {
+        logger.error(
+          "UserRepository::updateUser error trying to update user doc.",
+          `Error: ${error.message}`
+        );
+        throw new CommunicationError(
+          `Error trying to update user doc. ${error}`
+        );
+      }
+    },
   };
 }
 
