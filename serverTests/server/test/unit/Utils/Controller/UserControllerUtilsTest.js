@@ -14,7 +14,7 @@ suite("UserControllerUtils", () => {
       requestBodyWithoutNameField,
       requestBodyWithEmailAsEmptyString,
     } = UserFixtures;
-    test("if receiving body with all fields present and being different from empty string, validate user creation body request", (done) => {
+    test("NOVO TESTE: if receiving body with all fields present and being different from empty string, validate user creation body request", (done) => {
       const {
         containErrors,
         fieldsWithErrors,
@@ -28,7 +28,7 @@ suite("UserControllerUtils", () => {
       done();
     });
 
-    test("if receiving body without one field, validate user creation body request", (done) => {
+    test("NOVO TESTE: if receiving body without one field, validate user creation body request", (done) => {
       const {
         containErrors,
         fieldsWithErrors,
@@ -44,7 +44,7 @@ suite("UserControllerUtils", () => {
       done();
     });
 
-    test("if receiving body with one field being an empty string, validate user creation body request", (done) => {
+    test("NOVO TESTE: if receiving body with one field being an empty string, validate user creation body request", (done) => {
       const {
         containErrors,
         fieldsWithErrors,
