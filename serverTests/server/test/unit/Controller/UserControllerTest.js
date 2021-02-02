@@ -1,6 +1,6 @@
 const httpMock = require("node-mocks-http");
 const sinon = require("sinon");
-const { expect } = require("chai");
+const { assert, expect } = require("chai");
 const { EventEmitter } = require("events");
 const UserControllerFactory = require("../../../src/Controller/UserController");
 const UserServiceFactory = require("../../../src/Service/UserService");
@@ -23,7 +23,12 @@ suite("UserController", () => {
     sinon.restore();
   });
   suite("createUserAction", () => {
-    const { defaultUser, defaultRequestBody } = UserFixtures;
+    const {
+      defaultUser,
+      defaultRequestBody,
+      requestBodyWithoutNameField,
+    } = UserFixtures;
+
     test("if passing full body works correctly", (done) => {
       const request = httpMock.createRequest({
         method: "POST",
@@ -84,6 +89,26 @@ suite("UserController", () => {
         sinon.assert.calledOnce(createUserStub);
         done();
       });
+    });
+    test("NOVO TESTE: if passing uncompleted body an error is caught correctly", (done) => {
+      const request = httpMock.createRequest({
+        method: "POST",
+        url: "/users",
+        body: requestBodyWithoutNameField,
+      });
+      const response = httpMock.createResponse({ eventEmitter: EventEmitter });
+
+      controllerUtilsStub.validateCreateUserBody
+        .withArgs(requestBodyWithoutNameField)
+        .returns({ containErrors: true, fieldsWithErrors: ["name"] });
+
+      assert.throws(
+        () => userController.createUserAction(request, response),
+        "The following fields are required and must be not empty strings: name"
+      );
+      sinon.assert.calledOnce(controllerUtilsStub.validateCreateUserBody);
+
+      done();
     });
   });
 });
