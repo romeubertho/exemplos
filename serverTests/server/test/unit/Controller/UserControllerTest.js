@@ -21,6 +21,7 @@ suite("UserController", () => {
   });
   suite("createUserAction", () => {
     const { defaultUser } = UserFixtures;
+
     test("if passing full body works correctly", (done) => {
       const { defaultRequestBody } = UserFixtures;
       const request = httpMock.createRequest({
@@ -49,6 +50,7 @@ suite("UserController", () => {
         done();
       });
     });
+
     test("if throwing an error is caught correctly", (done) => {
       const error = new Error("Error trying to save user");
       const request = httpMock.createRequest({
@@ -70,6 +72,57 @@ suite("UserController", () => {
           error: error.message,
         };
         expect(JSON.parse(response._getData())).to.eql(responseBody);
+        sinon.assert.calledOnce(createUserStub);
+        done();
+      });
+    });
+
+    // test("just a test", (done) => {
+    //   const { testRequestBody, testUser } = UserFixtures;
+    //   const request = httpMock.createRequest({
+    //     method: "POST",
+    //     url: "/users",
+    //     body: testRequestBody,
+    //   });
+    //   const response = httpMock.createResponse({ eventEmitter: EventEmitter });
+
+    //   const createUserStub = sinon.stub(userService, "createUser");
+    //   createUserStub.withArgs(testRequestBody).resolves(testUser);
+    //   userController.createUserAction(request, response);
+
+    //   response.on("end", () => {
+    //     expect(response.statusCode).to.equal(200);
+    //     const responseBody = {
+    //       message: "User created",
+    //       responseObject: { user: testUser },
+    //     };
+    //     expect(response._getJSONData()).to.eql(responseBody);
+    //     // console.log(response._getJSONData());
+    //     sinon.assert.calledOnce(createUserStub);is caughty correctly
+    // });
+
+    test("if passing a body with empty email and throwing an error is caughty correctly", (done) => {
+      const { nullEmailRequestBody } = UserFixtures;
+      const error = new Error("Error trying to save user");
+      const request = httpMock.createRequest({
+        method: "POST",
+        url: "/users",
+        body: nullEmailRequestBody,
+      });
+      const response = httpMock.createResponse({ eventEmitter: EventEmitter });
+
+      const createUserStub = sinon.stub(userService, "createUser");
+      createUserStub.withArgs(nullEmailRequestBody).rejects(error);
+      userController.createUserAction(request, response);
+
+      response.on("end", () => {
+        expect(response.statusCode).to.equal(500);
+        const responseBody = {
+          message: "Error creating user",
+          error: error.message,
+        };
+        expect(response._getJSONData()).to.eql(responseBody);
+        console.log(response._getJSONData());
         sinon.assert.calledOnce(createUserStub);
         done();
       });
