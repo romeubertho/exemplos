@@ -90,7 +90,7 @@ suite("UserController", () => {
         done();
       });
     });
-    test("NOVO TESTE: if passing uncompleted body an error is caught correctly", (done) => {
+    test("NOVO TESTE: if passing uncompleted body an validation error is caught correctly", (done) => {
       const request = httpMock.createRequest({
         method: "POST",
         url: "/users",
