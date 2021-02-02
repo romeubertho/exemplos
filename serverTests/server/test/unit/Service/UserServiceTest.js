@@ -10,11 +10,9 @@ suite("UserSerive", () => {
   /** @var {UserService}  */
   let userService;
   let userRepository;
-  let serviceUtilsStub;
   beforeEach(() => {
-    serviceUtilsStub = { validateCreateUserBody: sinon.stub() };
     userRepository = UserRepositoryFactory();
-    userService = UserServiceFactory(userRepository, serviceUtilsStub);
+    userService = UserServiceFactory(userRepository);
   });
 
   afterEach(() => {
@@ -25,15 +23,10 @@ suite("UserSerive", () => {
     test("if receiving body with all info being different from empty string, create User", (done) => {
       const createUserStub = sinon.stub(userRepository, "createUser");
 
-      serviceUtilsStub.validateCreateUserBody
-        .withArgs(defaultRequestBody)
-        .returns({ containErrors: false });
-
       createUserStub.withArgs(defaultRequestBody).resolves(defaultUser);
 
       userService.createUser(defaultRequestBody).then((savedDoc) => {
         expect(savedDoc).to.eql(defaultUser);
-        sinon.assert.calledOnce(serviceUtilsStub.validateCreateUserBody);
         sinon.assert.calledOnce(createUserStub);
         done();
       });

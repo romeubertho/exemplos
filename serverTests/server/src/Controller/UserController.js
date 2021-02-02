@@ -8,7 +8,7 @@ const logger = require("../Utils/Logger");
  * @param {UserService} userService
  * @returns {UserController}
  */
-function UserController(userService) {
+function UserController(userService, userControllerUtils) {
   return {
     /**
      * @param {Request} req
@@ -16,6 +16,17 @@ function UserController(userService) {
      */
     createUserAction({ body }, res) {
       logger.trace("Entered UserController::createUserAction", body);
+      const validationInfo = userControllerUtils.validateCreateUserBody(body);
+      if (validationInfo.containErrors) {
+        logger.debug(
+          "UserController::createUserAction error validating request info"
+        );
+        throw BadRequestError(
+          `The following fields are required and must be not empty strings: ${validationInfo.fieldsWithErrors.join(
+            ", "
+          )}`
+        );
+      }
       return userService
         .createUser(body)
         .then((userInfo) => {

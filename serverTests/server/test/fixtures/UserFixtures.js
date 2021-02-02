@@ -1,13 +1,13 @@
-const CardFixtures = {};
+const UserFixtures = {};
 
-CardFixtures.defaultRequestBody = {
+UserFixtures.defaultRequestBody = {
   name: "Jeffzitos",
   lastname: "Tusqueira",
   email: "jeffzitos@tusca.com.br",
   gender: "descubra",
 };
 
-CardFixtures.defaultUser = {
+UserFixtures.defaultUser = {
   name: "Jeffzitos",
   lastname: "Tusqueira",
   email: "jeffzitos@tusca.com.br",
@@ -16,14 +16,14 @@ CardFixtures.defaultUser = {
   updatedAt: "2018-10-10T00:00:00.000Z",
 };
 
-CardFixtures.testRequestBody = {
+UserFixtures.testRequestBody = {
   name: "Romeu",
   lastname: "Berthao",
   email: "romeu@usp.br",
   gender: "masc",
 };
 
-CardFixtures.testUser = {
+UserFixtures.testUser = {
   name: "Romeu",
   lastname: "Berthao",
   email: "romeu@usp.br",
@@ -32,13 +32,13 @@ CardFixtures.testUser = {
   updatedAt: "2018-10-10T00:00:00.000Z",
 };
 
-CardFixtures.nullEmailRequestBody = {
+UserFixtures.nullEmailRequestBody = {
   name: "Romeu",
   lastname: "Berthao",
   gender: "masc",
 };
 
-CardFixtures.nullEmailUser = {
+UserFixtures.nullEmailUser = {
   name: "Romeu",
   lastname: "Berthao",
   gender: "masc",
@@ -46,4 +46,4 @@ CardFixtures.nullEmailUser = {
   updatedAt: "2018-10-10T00:00:00.000Z",
 };
 
-module.exports = CardFixtures;
+module.exports = UserFixtures;

@@ -1,66 +1,63 @@
-// const sinon = require('sinon');
-// const { assert, expect } = require('chai');
-// const CardFixtures = require('../../fixtures/CardFixtures');
+const sinon = require("sinon");
+const { assert, expect } = require("chai");
+const UserFixtures = require("../../fixtures/UserFixtures");
 
-// const CardRepositoryFactory = require('../../../src/Repository/CardRepository');
-// const CommunicationError = require('../../../src/Error/CommunicationError');
+const UserRepository = require("../../../src/Repository/UserRepository");
+const CommunicationError = require("../../../src/Error/CommunicationError");
 
-// suite('CardRepository', () => {
-//     /** @var {CardRepository} */
-//     let cardRepository;
-//     let cardModelMock;
-//     beforeEach(() => {
-//         cardModelMock  = {
-//             create: sinon.stub(),
-//         };
-//         cardRepository = CardRepositoryFactory(cardModelMock);
-//     });
+suite("UserRepository", () => {
+  /** @var {UserRepository} */
+  let userRepository;
+  let userModelMock;
+  beforeEach(() => {
+    userModelMock = {
+      create: sinon.stub(),
+    };
+    userRepository = UserRepository(userModelMock);
+  });
 
-//     afterEach(() => {
-//         sinon.restore();
-//     })
+  afterEach(() => {
+    sinon.restore();
+  });
 
-//     suite('createCard', () => {
-//         const { defaultCard } = CardFixtures;
-//         test('if passing a cardInfo tries to insert and save on mongo', (done) => {
-//             const cardDocMock = {
-//                 save: sinon.stub()
-//             }
-//             cardModelMock.create
-//                 .withArgs(defaultCard)
-//                 .returns(cardDocMock)
+  suite("createUser", () => {
+    const { defaultUser } = UserFixtures;
+    test("if passing a userInfo tries to insert and save on mongo", (done) => {
+      const userDocMock = {
+        save: sinon.stub(),
+      };
+      userModelMock.create.withArgs(defaultUser).returns(userDocMock);
 
-//             cardDocMock.save
-//                 .resolves(defaultCard)
+      userDocMock.save.resolves(defaultUser);
 
-//             cardRepository.createCard(defaultCard)
-//                 .then((response) => {
-//                     sinon.assert.calledOnce(cardModelMock.create);
-//                     sinon.assert.calledOnce(cardDocMock.save);
-//                     expect(response).to.eql(defaultCard);
-//                     done();
-//                 });
-//         });
-//         test('if some exception is thrown inside the function they fall into catch and'
-//             .concat(' throw a CommunicationError'), () => {
-//             const cardDocMock = {
-//                 save: sinon.stub()
-//             }
-//             cardModelMock.create
-//                 .withArgs(defaultCard)
-//                 .returns(cardDocMock)
+      userRepository.createUser(defaultUser).then((response) => {
+        sinon.assert.calledOnce(userModelMock.create);
+        sinon.assert.calledOnce(userDocMock.save);
+        expect(response).to.eql(defaultUser);
+        done();
+      });
+    });
+    test(
+      "if some exception is thrown inside the function they fall into catch and".concat(
+        " throw a CommunicationError"
+      ),
+      () => {
+        const userDocMock = {
+          save: sinon.stub(),
+        };
+        userModelMock.create.withArgs(defaultUser).returns(userDocMock);
 
-//             const errorMock = new Error('Mama tells me im ok')
-//             cardDocMock.save
-//                 .throws(errorMock);
+        const errorMock = new Error("Mama tells me im ok");
+        userDocMock.save.throws(errorMock);
 
-//             assert.throws(
-//                 () => cardRepository.createCard(defaultCard),
-//                 CommunicationError,
-//                 'Error trying to save card doc. Error: Error: Mama tells me im ok'
-//                 );
-//             sinon.assert.calledOnce(cardModelMock.create);
-//             sinon.assert.calledOnce(cardDocMock.save);
-//             })
-//     });
-// });
+        assert.throws(
+          () => userRepository.createUser(defaultUser),
+          CommunicationError,
+          "Error trying to save user doc. Error: Mama tells me im ok"
+        );
+        sinon.assert.calledOnce(userModelMock.create);
+        sinon.assert.calledOnce(userDocMock.save);
+      }
+    );
+  });
+});

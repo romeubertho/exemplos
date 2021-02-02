@@ -1,11 +1,11 @@
-const UserServiceUtils = {};
+const UserControllerUtils = {};
 
 /**
  * @typedef
  * @param {Object} userInfo
  */
 
-UserServiceUtils.validateCreateUserBody = (userInfo) => {
+UserControllerUtils.validateCreateUserBody = (userInfo) => {
   const fieldsToValidate = ["name", "lastname", "email", "gender"];
   const fieldsWithErrors = fieldsToValidate.reduce(
     (errors, fieldToValidate) =>
@@ -17,4 +17,4 @@ UserServiceUtils.validateCreateUserBody = (userInfo) => {
   return { containErrors: fieldsWithErrors.length > 0, fieldsWithErrors };
 };
 
-module.exports = UserServiceUtils;
+module.exports = UserControllerUtils;

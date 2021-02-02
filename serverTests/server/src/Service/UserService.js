@@ -10,7 +10,7 @@ const logger = require("../Utils/Logger");
  * @param {UserRepository} userRepository
  * @returns {UserService}
  */
-function UserService(userRepository, userServiceUtils) {
+function UserService(userRepository) {
   return {
     /**
      * @param {UserObject} userInfo
@@ -18,19 +18,10 @@ function UserService(userRepository, userServiceUtils) {
      */
     async createUser(userInfo) {
       logger.trace("Entered UserService::createUser", userInfo);
-      const validationInfo = userServiceUtils.validateCreateUserBody(userInfo);
-      if (!validationInfo.containErrors) {
-        return userRepository.createUser(userInfo).then((savedDoc) => {
-          logger.debug("UserService::createUser saved user");
-          return savedDoc;
-        });
-      }
-      logger.debug("UserService::createUser error validating user info");
-      throw BadRequestError(
-        `The following fields are required and must be not empty strings: ${validationInfo.fieldsWithErrors.join(
-          ", "
-        )}`
-      );
+      return userRepository.createUser(userInfo).then((savedDoc) => {
+        logger.debug("UserService::createUser saved user");
+        return savedDoc;
+      });
     },
   };
 }
