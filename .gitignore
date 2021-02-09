@@ -1,2 +1,2 @@
-./my-app/node_modules/*
-./my-app/build/*
+my-app/node_modules/
+my-app/build/
