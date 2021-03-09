@@ -3,12 +3,20 @@
   "private": true,
   "version": "1.0.0",
   "license": "ISC",
-  "main": "src/index.js",
+  "main": "build/index.js",
+  "scripts": {
+    "postinstall": "yarn build",
+    "clear": "rsync -r --delete --ignore-existing src/ build/",
+    "build": "babel src --out-dir build && yarn clear"
+  },
   "dependencies": {
     "@example/shared": "*",
     "knex": "^0.21.17",
     "lodash": "^4.17.20",
     "knex-migrate": "^1.7.4",
     "pg": "^8.5.1"
+  },
+  "devDependencies": {
+    "@example/babel": "*"
   }
 }
