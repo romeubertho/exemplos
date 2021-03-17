@@ -1,39 +1,37 @@
-import HtmlWebpackPlugin from 'html-webpack-plugin';
-import WebpackBeforeBuildPlugin from 'before-build-webpack';
-import webpack from 'webpack';
-import path from 'path';
-import execa from 'execa';
-import DotEnv from 'dotenv-webpack';
-
-const cwd = process.cwd();
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const WebpackBeforeBuildPlugin = require('before-build-webpack');
+const webpack = require('webpack');
+const path = require('path');
+const execa = require('execa');
+const DotEnv = require('dotenv-webpack');
 
 const isDevelopment = process.env.NODE_ENV.toUpperCase() === 'DEVELOPMENT';
 const isProduction = process.env.NODE_ENV.toUpperCase() === 'PRODUCTION';
 
 const getEnvFromCurrentEnvironment = () => {
   if (isDevelopment) {
-    return './.env.development';
+    return '.env.development';
   }
 
   if (isProduction) {
-    return './.env.production';
+    return '.env.production';
   }
 
-  return './.env.homolog';
+  return '.env.homolog';
 };
 
-export default {
+module.exports = {
   mode: isDevelopment ? 'development' : 'production',
   entry: './src/index.js',
-  context: path.join(cwd, '.'),
+  context: path.resolve(__dirname, '.'),
   devtool: 'source-map',
   resolve: {
-    modules: [path.join(cwd, 'src'), 'node_modules'],
+    modules: [path.resolve(__dirname, 'src'), 'node_modules'],
     extensions: ['.js', '.jsx'],
   },
   output: {
-    path: path.join(cwd, 'build'),
-    filename: '[name].bundle.js',
+    path: path.resolve(__dirname, 'build'),
+    filename: 'bundle.js',
   },
   module: {
     rules: [
@@ -61,8 +59,8 @@ export default {
     ],
   },
   devServer: {
-    contentBase: path.join(cwd, 'public'),
-    filename: '[name].bundle.js',
+    contentBase: path.resolve(__dirname, 'public'),
+    filename: 'bundle.js',
     host: '0.0.0.0',
     historyApiFallback: true,
     disableHostCheck: true,
@@ -72,7 +70,7 @@ export default {
   plugins: [
     new HtmlWebpackPlugin({
       template: './public/index.html',
-      path: path.join(cwd, 'public'),
+      path: path.resolve(__dirname, 'public'),
       filename: 'index.html',
     }),
     new webpack.ProvidePlugin({
@@ -80,7 +78,7 @@ export default {
     }),
     new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /pt-br/),
     new DotEnv({
-      path: path.join(cwd, getEnvFromCurrentEnvironment()),
+      path: path.resolve(__dirname, getEnvFromCurrentEnvironment()),
       safe: true,
       silent: true,
     }),
