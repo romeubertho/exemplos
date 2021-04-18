@@ -3,6 +3,8 @@ import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 
 import { dbConnect } from '@example/connectors';
+import transformErrorToGraphQLError from './utils/graphql/transformErrorToGraphQLError';
+import auth from './utils/auth/authentication';
 import { graphqlHTTP } from 'express-graphql';
 import { printSchema } from 'graphql/utilities';
 import fs from 'fs';
@@ -14,19 +16,11 @@ import moment from 'moment-timezone';
 import compression from 'compression';
 
 import schema from './modules/schema';
-import auth from './utils/auth';
-import transformErrorToGraphQLError from './utils/transformErrorToGraphQLError';
-import apiServer from './apiServer';
-import knexMigration from './utils/scripts/knexMigration';
 
 const { NODE_ENV, GRAPHQL_PORT, GRAPHQL_BASE_URL } = process.env;
 const isDevelopmentMode = NODE_ENV.toUpperCase() === 'DEVELOPMENT';
 const graphQLServer = express();
 const jwtAuth = auth();
-
-if (isDevelopmentMode) {
-  knexMigration();
-}
 
 const corsConfig = {
   methods: 'GET,POST',
@@ -74,8 +68,6 @@ graphQLServer.use(cors(corsConfig));
 graphQLServer.use(express.json({ limit: '10mb' }));
 graphQLServer.use(express.urlencoded({ extended: true }));
 graphQLServer.use(jwtAuth.initialize());
-
-apiServer(graphQLServer);
 
 graphQLServer.all('/graphql*', jwtAuth.authenticate());
 

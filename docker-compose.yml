@@ -36,10 +36,10 @@ services:
 
   nginx:
     extends:
-      file: nginx/docker-compose.yml
+      file: packages/nginx/docker-compose.yml
       service: nginx
     volumes:
-      - ./nginx/.nginx.conf:/etc/nginx/conf.d/nginx.template
+      - ./packages/nginx/.nginx.conf:/etc/nginx/conf.d/nginx.template
     depends_on:
       server:
         condition: service_healthy

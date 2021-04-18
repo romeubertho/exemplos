@@ -3,18 +3,16 @@ import Cookies from 'universal-cookie';
 const AuthorizationHeader = 'Web-Example-Authorization';
 
 const jwtToken = {
-  set(token) {
+  set: (token) => {
     return new Cookies().set(AuthorizationHeader, `Bearer ${token}`, {
       path: '/',
       domain: process.env.DOMAIN,
     });
   },
-
-  get() {
+  get: () => {
     return decodeURIComponent(new Cookies().get(AuthorizationHeader) || '');
   },
-
-  destroy() {
+  destroy: () => {
     return new Cookies().remove(AuthorizationHeader, {
       path: '/',
       domain: process.env.DOMAIN,

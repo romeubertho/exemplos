@@ -1,7 +1,7 @@
 import { GraphQLString } from 'graphql';
 import { connectionDefinitions } from 'graphql-relay';
 
-import connectionFields from '../../utils/connectionFields';
+import { connectionFields } from '../../utils/graphql/connectionFields';
 import { registerGraphQLNodeObjectType } from '../node/NodeType';
 
 const UserType = registerGraphQLNodeObjectType('user')({

@@ -1,0 +1,26 @@
+{
+  "name": "@example/utils",
+  "private": true,
+  "version": "1.0.0",
+  "license": "ISC",
+  "main": "src/index.js",
+  "scripts": {
+    "build": "babel src -d build --extensions \".js\" --no-copy-ignored"
+  },
+  "dependencies": {
+    "@example/connectors": "*",
+    "@example/entities": "*",
+    "@example/shared": "*",
+    "passport": "^0.4.1",
+    "passport-jwt": "^4.0.0",
+    "universal-cookie": "^4.0.4",
+    "graphql": "^15.5.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.12.16",
+    "@babel/core": "^7.12.16",
+    "@babel/plugin-proposal-function-bind": "^7.12.13",
+    "@babel/plugin-transform-runtime": "^7.12.15",
+    "@babel/preset-env": "^7.12.16"
+  }
+}

@@ -1,7 +1,7 @@
 import { useMutation } from 'relay-hooks';
+import { jwtToken } from '@example/utils';
 import Button from '@material-ui/core/Button';
 
-import jwtToken from '../utils/jwtToken';
 import LoginMutation from '../modules/auth/LoginMutation';
 
 const LoginButton = () => {

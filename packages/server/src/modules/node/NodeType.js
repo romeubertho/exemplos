@@ -1,8 +1,7 @@
 import { dbConnect } from '@example/connectors';
+import { getUserOrThrowError } from '../../utils/auth/authentication';
 import { GraphQLObjectType } from 'graphql';
 import { fromGlobalId, globalIdField, nodeDefinitions } from 'graphql-relay';
-
-import { getUserOrThrowError } from '../../utils/auth';
 
 const isFunction = object => typeof object === 'function';
 const getters = {};
