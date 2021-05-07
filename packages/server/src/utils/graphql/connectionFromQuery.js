@@ -1,12 +1,12 @@
 const FIRST = 1000;
 const MAX_FIRST = 10000;
 
-export const base64 = str => Buffer.from(str, 'ascii').toString('base64');
-export const unbase64 = b64 => Buffer.from(b64, 'base64').toString('ascii');
+const base64 = str => Buffer.from(str, 'ascii').toString('base64');
+const unbase64 = b64 => Buffer.from(b64, 'base64').toString('ascii');
 
-export const cursorToOffset = cursor => parseInt(unbase64(cursor), 10);
+const cursorToOffset = cursor => parseInt(unbase64(cursor), 10);
 
-export const getOffsetWithDefault = (cursor, defaultOffset) => {
+const getOffsetWithDefault = (cursor, defaultOffset) => {
   if (cursor === undefined || cursor === null) {
     return defaultOffset;
   }
@@ -15,9 +15,9 @@ export const getOffsetWithDefault = (cursor, defaultOffset) => {
   return isNaN(offset) ? defaultOffset : offset;
 };
 
-export const offsetToCursor = offset => base64(offset);
+const offsetToCursor = offset => base64(offset);
 
-export const getTotalCount = async ({ query }) => {
+const getTotalCount = async ({ query }) => {
   const resolvedQuery = await query
     .count('*')
     .clearOrder()
@@ -28,7 +28,7 @@ export const getTotalCount = async ({ query }) => {
   return resolvedQuery.count;
 };
 
-export const getTotalDistinctCount = async props => {
+const getTotalDistinctCount = async props => {
   const { query, distinctExpression } = props;
 
   if (distinctExpression) {
@@ -45,7 +45,7 @@ export const getTotalDistinctCount = async props => {
   return getTotalCount(props);
 };
 
-export const calculateOffsets = ({ args, totalCount }) => {
+const calculateOffsets = ({ args, totalCount }) => {
   const { after, before } = args;
   let { first, last } = args;
 
@@ -91,7 +91,7 @@ export const calculateOffsets = ({ args, totalCount }) => {
   };
 };
 
-export function getPageInfo({
+function getPageInfo({
   edges,
   totalCount,
   startCursorOffset,

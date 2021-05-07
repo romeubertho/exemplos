@@ -1,5 +1,5 @@
+import { getUserOrThrowError } from '../../utils/auth/authentication';
 import UserType from '../user/UserType';
-import { getUserOrThrowError } from '../../utils/auth';
 
 export default {
   type: UserType,

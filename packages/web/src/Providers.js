@@ -5,7 +5,7 @@ import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import { RelayEnvironmentProvider } from 'relay-hooks';
 import PropTypes from 'prop-types';
 
-import { environment } from './relay';
+import { environment } from '@example/utils';
 
 const theme = createMuiTheme({
   palette: {
