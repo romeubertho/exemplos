@@ -1,29 +1,16 @@
-import { useMutation } from 'relay-hooks';
-import { jwtToken } from '@example/utils';
+import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
-
-import LoginMutation from '../modules/auth/LoginMutation';
+import { useHistory } from "react-router-dom";
 
 const LoginButton = () => {
-  const [loginMutation, { loading }] = useMutation(LoginMutation, {
-    onCompleted: ({ login }) => {
-      jwtToken.set(login.jwtToken);
-      location.reload();
-    },
-  });
+  let history = useHistory();
 
   const handleClick = () => {
-    loginMutation({
-      variables: {
-        input: { email: 'lucasgdbittencourt@gmail.com', password: '123' },
-      },
-    });
-  };
+    history.push('/login');
+  }
 
   return (
-    <Button color="secondary" onClick={handleClick} disabled={loading}>
-      Login
-    </Button>
+    <Button onClick={handleClick}>Login</Button>
   );
 };
 

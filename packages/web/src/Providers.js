@@ -2,7 +2,7 @@ import DateMomentUtils from '@date-io/moment';
 import { Notification } from '@example/ui';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
-import { RelayEnvironmentProvider } from 'relay-hooks';
+import { RelayEnvironmentProvider } from "relay-hooks";
 import PropTypes from 'prop-types';
 
 import { environment } from '@example/utils';

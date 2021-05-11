@@ -2,14 +2,18 @@ import { Route, Switch, HashRouter } from 'react-router-dom';
 
 import EnvironmentLayout from './layout/EnvironmentLayout';
 import HomePage from './pages/Home/HomePage';
+import RegisterPage from './pages/Register/RegisterPage';
+import LoginPage from './pages/Login/LoginPage';
 
 const Routes = () => (
   <HashRouter>
-    <EnvironmentLayout>
-      <Switch>
+    <Switch>
+      <Route path="/register" component={RegisterPage} />
+      <Route path="/login" component={LoginPage} />
+      <EnvironmentLayout>
         <Route path="/" component={HomePage} />
-      </Switch>
-    </EnvironmentLayout>
+      </EnvironmentLayout>
+    </Switch>
   </HashRouter>
 );
 

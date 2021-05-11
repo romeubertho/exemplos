@@ -13,11 +13,11 @@ const authEntity = AuthModel(dbConnect);
 
 const getUserJWT = async (user, password) => {
   if (bcrypt.compareSync(password, user.password)) {
-    const login = await authEntity.CreateUser({ userId: user.id });
+    const loginId = await authEntity.login(user.id);
 
-    if (login.id) {
+    if (loginId) {
       const payload = {
-        id: login.id,
+        id: loginId,
         email: user.email,
         active: true,
       };

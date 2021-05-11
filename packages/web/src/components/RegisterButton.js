@@ -3,13 +3,13 @@ import { Notification } from '@example/ui';
 import { useMutation } from 'relay-hooks';
 import Button from '@material-ui/core/Button';
 
-import CreateUserMutation from '../modules/auth/CreateUserMutation';
+import useCreateUserMutation from '../modules/auth/useCreateUserMutation';
 import { jwtToken } from '@example/utils';
 
 const RegisterButton = () => {
   const { enqueueSnackbar } = Notification.useSnackbar();
 
-  const [createUserMutation, { loading }] = useMutation(CreateUserMutation, {
+  const [createUserMutation, loading] = useCreateUserMutation({
     onCompleted: ({ createUser }) => {
       jwtToken.set(createUser.jwtToken);
       location.reload();
@@ -26,14 +26,10 @@ const RegisterButton = () => {
 
   const handleClick = () =>
     createUserMutation({
-      variables: {
-        input: {
-          name: 'Lucas',
-          lastname: 'Bittencourt',
-          email: 'lucasgdbittencourt@gmail.com',
-          password: '123',
-        },
-      },
+      name: 'Lucas',
+      lastname: 'Bittencourt',
+      email: 'lucasgdbittencourt@gmail.com',
+      password: '123',
     });
 
   return (

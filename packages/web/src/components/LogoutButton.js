@@ -2,17 +2,17 @@ import { useMutation } from 'relay-hooks';
 import Button from '@material-ui/core/Button';
 import { jwtToken } from '@example/utils';
 
-import LogoutMutation from '../modules/auth/LogoutMutation';
+import useLogoutMutation from '../modules/auth/useLogoutMutation';
 
 const LogoutButton = () => {
-  const [logoutMutation, { loading }] = useMutation(LogoutMutation, {
+  const [logoutMutation, loading] = useLogoutMutation({
     onCompleted: () => {
       jwtToken.destroy();
       location.reload();
     },
   });
 
-  const handleClick = () => logoutMutation({ variables: { input: {} } });
+  const handleClick = () => logoutMutation();
 
   return (
     <Button color="primary" onClick={handleClick} disabled={loading}>
