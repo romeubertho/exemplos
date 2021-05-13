@@ -8,11 +8,11 @@ module.exports = {
   },
   extends: [
     'airbnb',
-    'prettier',
     'plugin:react/recommended',
     'plugin:relay/recommended',
     'plugin:react-hooks/recommended',
     'eslint:recommended',
+    'plugin:prettier/recommended',
     'plugin:import/errors',
     'plugin:import/warnings',
   ],
@@ -23,6 +23,8 @@ module.exports = {
   },
   plugins: ['react', 'prettier', 'relay', 'import'],
   rules: {
+    curly: ['error', 'all'],
+    'prettier/prettier': 'error',
     'max-len': ['warn', { code: 120 }],
     'no-restricted-globals': 'off',
     'import/prefer-default-export': 'off',
@@ -37,6 +39,8 @@ module.exports = {
     'import/namespace': 2,
     'import/default': 2,
     'import/export': 2,
+    quotes: ['error', 'single', 'avoid-escape'],
+    'no-console': ['warn'],
     'react/jsx-filename-extension': [
       'error',
       {

@@ -3,8 +3,6 @@ import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 
 import { dbConnect } from '@example/connectors';
-import transformErrorToGraphQLError from './utils/graphql/transformErrorToGraphQLError';
-import auth from './utils/auth/authentication';
 import { graphqlHTTP } from 'express-graphql';
 import { printSchema } from 'graphql/utilities';
 import fs from 'fs';
@@ -15,6 +13,8 @@ import expressPlayground from 'graphql-playground-middleware-express';
 import moment from 'moment-timezone';
 import compression from 'compression';
 
+import transformErrorToGraphQLError from './utils/graphql/transformErrorToGraphQLError';
+import auth from './utils/auth/authentication';
 import schema from './modules/schema';
 
 const { NODE_ENV, GRAPHQL_PORT, GRAPHQL_BASE_URL } = process.env;
