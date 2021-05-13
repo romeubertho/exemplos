@@ -35,7 +35,7 @@ const LoginForm = styled.form`
   padding: 10px;
   border-radius: 2px;
   background-color: white;
-  box-shadow: 0px 0px 8px -2px rgba(36,36,36,1);
+  box-shadow: 0px 0px 8px -2px rgba(36, 36, 36, 1);
 `;
 
 const FullWidthField = styled(TextField)`
@@ -75,7 +75,6 @@ const LoginPage = () => {
 
   return (
     <OuterLoginPage>
-      
       <LoginForm onSubmit={formik.handleSubmit}>
         <FullWidthField
           id="email"
