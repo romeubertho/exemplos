@@ -1,4 +1,4 @@
-import { convertKeysMiddleware } from '@example/shared';
+import { convertKeysMiddleware } from '@example/utils';
 import assert from 'assert';
 import knex from 'knex';
 import { head } from 'lodash';

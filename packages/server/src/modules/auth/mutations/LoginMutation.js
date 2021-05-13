@@ -1,6 +1,6 @@
 import { dbConnect } from '@example/connectors';
 import { UserModel, AuthModel } from '@example/entities';
-import { ApplicationError, errorConfig } from '@example/shared';
+import { ApplicationError, errorConfig } from '@example/utils';
 import bcrypt from 'bcryptjs';
 import { GraphQLNonNull, GraphQLString } from 'graphql';
 import { mutationWithClientMutationId } from 'graphql-relay';

@@ -1,4 +1,4 @@
-import { errorConfig, getError } from '@example/shared';
+import { errorConfig, getError } from '@example/utils';
 import { graphql, useQuery } from 'relay-hooks';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';

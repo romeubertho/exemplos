@@ -1,6 +1,6 @@
 import { dbConnect } from '@example/connectors';
 import { UserModel, AuthModel } from '@example/entities';
-import { ApplicationError, errorConfig } from '@example/shared';
+import { ApplicationError, errorConfig } from '@example/utils';
 import passport from 'passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 

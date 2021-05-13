@@ -19,7 +19,7 @@
   "dependencies": {
     "@example/connectors": "*",
     "@example/entities": "*",
-    "@example/shared": "*",
+    "@example/utils": "*",
     "bcryptjs": "^2.4.3",
     "compression": "^1.7.4",
     "core-js": "^3.8.3",
@@ -35,6 +35,8 @@
     "lodash": "^4.17.20",
     "moment": "^2.29.1",
     "moment-timezone": "^0.5.33",
+    "passport": "^0.4.1",
+    "passport-jwt": "^4.0.0",
     "regenerator-runtime": "^0.13.7"
   },
   "devDependencies": {

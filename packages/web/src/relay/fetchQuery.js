@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
-import jwtToken from '../jwt/jwtToken';
+import { jwtToken } from '@example/utils';
+
 import fetchWithRetries from './fetchWithRetries';
 import { isMutation } from './helpers';
 

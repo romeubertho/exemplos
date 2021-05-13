@@ -1,2 +1,3 @@
 export * from './jwt';
-export * from './relay';
+export * from './errors';
+export * from './string';

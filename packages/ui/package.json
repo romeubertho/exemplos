@@ -7,7 +7,7 @@
   "dependencies": {
     "@example/connectors": "*",
     "@example/entities": "*",
-    "@example/shared": "*",
+    "@example/utils": "*",
     "notistack": "^1.0.3",
     "styled-components": "^5.2.1",
     "prop-types": "^15.7.2",

@@ -1,10 +1,8 @@
-import { errorConfig, getError } from '@example/shared';
+import { errorConfig, getError, jwtToken } from '@example/utils';
 import { Notification } from '@example/ui';
-import { useMutation } from 'relay-hooks';
 import Button from '@material-ui/core/Button';
 
 import useCreateUserMutation from '../modules/auth/useCreateUserMutation';
-import { jwtToken } from '@example/utils';
 
 const RegisterButton = () => {
   const { enqueueSnackbar } = Notification.useSnackbar();

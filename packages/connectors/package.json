@@ -5,7 +5,7 @@
   "license": "ISC",
   "main": "src/index.js",
   "dependencies": {
-    "@example/shared": "*",
+    "@example/utils": "*",
     "knex": "^0.21.17",
     "lodash": "^4.17.20",
     "knex-migrate": "^1.7.4",

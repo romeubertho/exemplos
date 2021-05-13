@@ -3,7 +3,7 @@ import Cookies from 'universal-cookie';
 const AuthorizationHeader = 'Authorization';
 
 const jwtToken = {
-  set: (token) => {
+  set: token => {
     return new Cookies().set(AuthorizationHeader, `Bearer ${token}`, {
       path: '/',
       domain: process.env.DOMAIN,
