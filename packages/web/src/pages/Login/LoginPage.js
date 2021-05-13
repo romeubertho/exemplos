@@ -100,7 +100,7 @@ const LoginPage = () => {
           InputLabelProps={{ shrink: true }}
         />
 
-        <SubmitButton type="submit" color="primary" variant="contained">
+        <SubmitButton type="submit" color="primary" variant="outlined">
           Entrar
         </SubmitButton>
       </LoginForm>
