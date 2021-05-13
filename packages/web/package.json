@@ -35,6 +35,7 @@
     "yup": "^0.32.9"
   },
   "devDependencies": {
+    "@example/eslint-config": "*",
     "@babel/plugin-proposal-class-properties": "^7.12.13",
     "@babel/plugin-proposal-export-default-from": "^7.12.13",
     "@babel/plugin-proposal-export-namespace-from": "^7.12.13",
