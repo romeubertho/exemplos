@@ -2,7 +2,7 @@ import { graphql, useMutation } from 'relay-hooks';
 import { useCallback } from 'react';
 
 const mutation = graphql`
-  mutation LogoutMutation($input: LogoutMutationInput!) {
+  mutation useLogoutMutation($input: LogoutMutationInput!) {
     logout(input: $input) {
       clientMutationId
     }

@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { Notification } from '@example/ui';
 import { jwtToken } from '@example/utils';
 import { useFormik } from 'formik';
-import { useHistory } from "react-router-dom";
+import { useHistory } from 'react-router-dom';
 import * as yup from 'yup';
 
 import { TextField, Button } from '@material-ui/core';
@@ -21,12 +21,31 @@ const validationSchema = yup.object({
 });
 
 const OuterLoginPage = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 `;
 
-const StyledForm = styled.form`
+const LoginForm = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 250px;
+  padding: 10px;
+  border-radius: 2px;
+  background-color: white;
+  box-shadow: 0px 0px 8px -2px rgba(36,36,36,1);
+`;
+
+const FullWidthField = styled(TextField)`
+  width: 100%;
+`;
+
+const SubmitButton = styled(Button)`
+  && {
+    margin-top: 16px;
+  }
 `;
 
 const LoginPage = () => {
@@ -39,7 +58,7 @@ const LoginPage = () => {
       password: '',
     },
     validationSchema,
-    onSubmit: (values) => {
+    onSubmit: values => {
       loginMutation(values);
     },
   });
@@ -56,8 +75,8 @@ const LoginPage = () => {
 
   return (
     <OuterLoginPage>
-      <StyledForm onSubmit={formik.handleSubmit}>
-        <TextField
+      <LoginForm onSubmit={formik.handleSubmit}>
+        <FullWidthField
           id="email"
           name="email"
           label="E-mail"
@@ -66,7 +85,7 @@ const LoginPage = () => {
           error={formik.touched.email && Boolean(formik.errors.email)}
           helperText={formik.touched.email && formik.errors.email}
         />
-        <TextField
+        <FullWidthField
           id="password"
           name="password"
           label="Password"
@@ -76,8 +95,8 @@ const LoginPage = () => {
           error={formik.touched.password && Boolean(formik.errors.password)}
           helperText={formik.touched.password && formik.errors.password}
         />
-        <Button type="submit">Submit</Button>
-      </StyledForm>
+        <SubmitButton type="submit">Submit</SubmitButton>
+      </LoginForm>
     </OuterLoginPage>
   );
 };

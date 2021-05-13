@@ -3,7 +3,7 @@ version: '2.4'
 services:
   nginx:
     image: nginx
-    container_name: example_nginx
+    container_name: example-nginx
     ports:
       - '80:80'
     environment:

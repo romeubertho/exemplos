@@ -2,7 +2,7 @@ import { graphql, useMutation } from 'relay-hooks';
 import { useCallback } from 'react';
 
 const mutation = graphql`
-  mutation CreateUserMutation($input: CreateUserMutationInput!) {
+  mutation useCreateUserMutation($input: CreateUserMutationInput!) {
     createUser(input: $input) {
       jwtToken
     }
