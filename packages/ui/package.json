@@ -6,12 +6,11 @@
   "main": "src/index.js",
   "dependencies": {
     "@example/connectors": "*",
-    "@example/entities": "*",
     "@example/utils": "*",
-    "notistack": "^1.0.3",
-    "styled-components": "^5.2.1",
+    "notistack": "^1.0.7",
+    "styled-components": "^5.3.0",
     "prop-types": "^15.7.2",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1"
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
   }
 }

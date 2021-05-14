@@ -7,7 +7,7 @@ import useCreateUserMutation from '../modules/auth/useCreateUserMutation';
 const RegisterButton = () => {
   const { enqueueSnackbar } = Notification.useSnackbar();
 
-  const [createUserMutation, loading] = useCreateUserMutation({
+  const [createUserMutation, { loading }] = useCreateUserMutation({
     onCompleted: ({ createUser }) => {
       jwtToken.set(createUser.jwtToken);
       location.reload();
@@ -22,13 +22,14 @@ const RegisterButton = () => {
     },
   });
 
-  const handleClick = () =>
-    createUserMutation({
+  const handleClick = () => {
+    return createUserMutation({
       name: 'Lucas',
       lastname: 'Bittencourt',
       email: 'lucasgdbittencourt@gmail.com',
       password: '123',
     });
+  };
 
   return (
     <Button color="primary" onClick={handleClick} disabled={loading}>

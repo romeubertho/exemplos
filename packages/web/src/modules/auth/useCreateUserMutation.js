@@ -10,18 +10,14 @@ const mutation = graphql`
 `;
 
 const useCreateUserMutation = mutationProps => {
-  const [commit, { loading }] = useMutation(mutation, mutationProps);
+  const [commit, options] = useMutation(mutation, mutationProps);
+
   const commitFunction = useCallback(
-    input => {
-      return commit({
-        variables: {
-          input,
-        },
-      });
-    },
+    input => commit({ variables: { input } }),
     [commit],
   );
-  return [commitFunction, loading];
+
+  return [commitFunction, options];
 };
 
 export default useCreateUserMutation;
