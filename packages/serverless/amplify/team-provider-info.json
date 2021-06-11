@@ -1,0 +1,41 @@
+{
+  "prod": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-serverlesstest-prod-225155-authRole",
+      "UnauthRoleArn": "arn:aws:iam::357003500481:role/amplify-serverlesstest-prod-225155-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::357003500481:role/amplify-serverlesstest-prod-225155-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-serverlesstest-prod-225155-deployment",
+      "UnauthRoleName": "amplify-serverlesstest-prod-225155-unauthRole",
+      "StackName": "amplify-serverlesstest-prod-225155",
+      "StackId": "arn:aws:cloudformation:us-east-1:357003500481:stack/amplify-serverlesstest-prod-225155/9f2b1b60-ca57-11eb-8ebb-0ae28d89ba2b",
+      "AmplifyAppId": "d3ccqsffmdhiau"
+    }
+  },
+  "homolog": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-serverlesstest-homolog-230000-authRole",
+      "UnauthRoleArn": "arn:aws:iam::357003500481:role/amplify-serverlesstest-homolog-230000-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::357003500481:role/amplify-serverlesstest-homolog-230000-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-serverlesstest-homolog-230000-deployment",
+      "UnauthRoleName": "amplify-serverlesstest-homolog-230000-unauthRole",
+      "StackName": "amplify-serverlesstest-homolog-230000",
+      "StackId": "arn:aws:cloudformation:us-east-1:357003500481:stack/amplify-serverlesstest-homolog-230000/bc386f40-ca58-11eb-a88c-0eb55df318d5",
+      "AmplifyAppId": "d3ccqsffmdhiau"
+    }
+  },
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-serverlesstest-dev-230134-authRole",
+      "UnauthRoleArn": "arn:aws:iam::357003500481:role/amplify-serverlesstest-dev-230134-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::357003500481:role/amplify-serverlesstest-dev-230134-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-serverlesstest-dev-230134-deployment",
+      "UnauthRoleName": "amplify-serverlesstest-dev-230134-unauthRole",
+      "StackName": "amplify-serverlesstest-dev-230134",
+      "StackId": "arn:aws:cloudformation:us-east-1:357003500481:stack/amplify-serverlesstest-dev-230134/f41c99e0-ca58-11eb-8cff-12695902b27f",
+      "AmplifyAppId": "d3ccqsffmdhiau"
+    }
+  }
+}
