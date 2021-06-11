@@ -5,5 +5,12 @@
       "type": "cicd",
       "lastPushTimeStamp": "2021-06-11T02:23:19.024Z"
     }
+  },
+  "function": {
+    "connectorsTest": {
+      "providerPlugin": "awscloudformation",
+      "service": "LambdaLayer",
+      "build": true
+    }
   }
 }
