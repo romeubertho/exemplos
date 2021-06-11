@@ -10,6 +10,14 @@
             "StackName": "amplify-amplifyworkshoptest-prod-231436",
             "StackId": "arn:aws:cloudformation:us-east-1:357003500481:stack/amplify-amplifyworkshoptest-prod-231436/c8238310-ca5a-11eb-ad93-0ef29e620f87",
             "AmplifyAppId": "d1moz5ywhhocyl"
+        },
+        "categories": {
+            "hosting": {
+                "amplifyhosting": {
+                    "appId": "d1moz5ywhhocyl",
+                    "type": "cicd"
+                }
+            }
         }
     },
     "homolog": {
