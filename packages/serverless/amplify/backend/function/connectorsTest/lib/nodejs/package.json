@@ -1,0 +1,22 @@
+{
+  "name": "connectorsTest",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "private":true,
+  "scripts": {
+    "preinstall": "yarn generate-lock-entry > yarn.lock",
+    "resolve:symlink": "cp -RL node_modules/ tmp/ && rm -rf node_modules/ && mv tmp node_modules",
+    "install": "yarn workspace @amplify/connectors run build && yarn resolve:symlink"
+  },
+  "dependencies": {
+    "@amplify/connectors": "*"
+  },
+  "workspaces": {
+    "nohoist": [
+      "@amplify/connectors",
+      "@amplify/connectors/**"
+    ]
+  },
+  "devDependencies": {}
+}
