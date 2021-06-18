@@ -1,0 +1,41 @@
+{
+  "prod": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-serverlessromeu-prod-151907-authRole",
+      "UnauthRoleArn": "arn:aws:iam::357003500481:role/amplify-serverlessromeu-prod-151907-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::357003500481:role/amplify-serverlessromeu-prod-151907-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-serverlessromeu-prod-151907-deployment",
+      "UnauthRoleName": "amplify-serverlessromeu-prod-151907-unauthRole",
+      "StackName": "amplify-serverlessromeu-prod-151907",
+      "StackId": "arn:aws:cloudformation:us-east-1:357003500481:stack/amplify-serverlessromeu-prod-151907/ae2111a0-d061-11eb-b6a5-12eb925008c9",
+      "AmplifyAppId": "d2ujuacetigk5z"
+    }
+  },
+  "homolog": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-serverlessromeu-homolog-152853-authRole",
+      "UnauthRoleArn": "arn:aws:iam::357003500481:role/amplify-serverlessromeu-homolog-152853-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::357003500481:role/amplify-serverlessromeu-homolog-152853-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-serverlessromeu-homolog-152853-deployment",
+      "UnauthRoleName": "amplify-serverlessromeu-homolog-152853-unauthRole",
+      "StackName": "amplify-serverlessromeu-homolog-152853",
+      "StackId": "arn:aws:cloudformation:us-east-1:357003500481:stack/amplify-serverlessromeu-homolog-152853/0a961600-d063-11eb-8e13-120f9e9763df",
+      "AmplifyAppId": "d2ujuacetigk5z"
+    }
+  },
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-serverlessromeu-dev-153104-authRole",
+      "UnauthRoleArn": "arn:aws:iam::357003500481:role/amplify-serverlessromeu-dev-153104-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::357003500481:role/amplify-serverlessromeu-dev-153104-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-serverlessromeu-dev-153104-deployment",
+      "UnauthRoleName": "amplify-serverlessromeu-dev-153104-unauthRole",
+      "StackName": "amplify-serverlessromeu-dev-153104",
+      "StackId": "arn:aws:cloudformation:us-east-1:357003500481:stack/amplify-serverlessromeu-dev-153104/58beefa0-d063-11eb-9a79-0ef4281dfc4d",
+      "AmplifyAppId": "d2ujuacetigk5z"
+    }
+  }
+}
