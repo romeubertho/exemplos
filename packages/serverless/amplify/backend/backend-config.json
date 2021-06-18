@@ -1,1 +1,9 @@
-{}
+{
+  "function": {
+    "lambdaRomeu": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  }
+}
