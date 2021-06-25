@@ -10,14 +10,6 @@
       "StackName": "amplify-serverlessromeu-prod-151907",
       "StackId": "arn:aws:cloudformation:us-east-1:357003500481:stack/amplify-serverlessromeu-prod-151907/ae2111a0-d061-11eb-b6a5-12eb925008c9",
       "AmplifyAppId": "d2ujuacetigk5z"
-    },
-    "categories": {
-      "hosting": {
-        "amplifyhosting": {
-          "appId": "d2ujuacetigk5z",
-          "type": "cicd"
-        }
-      }
     }
   },
   "homolog": {
