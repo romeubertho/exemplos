@@ -25,6 +25,8 @@ exports["default"] = void 0;
 
 var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
 
+var _slicedToArray2 = _interopRequireDefault(require("@babel/runtime/helpers/slicedToArray"));
+
 require("core-js/modules/es.array.is-array.js");
 
 require("core-js/modules/es.array.map.js");
@@ -55,13 +57,25 @@ var createKnexConnection = function createKnexConnection() {
     client: 'pg',
     connection: connectionConfig,
     postProcessResponse: function postProcessResponse(result, queryContext) {
-      if (Array.isArray(result)) {
-        return result.map(function (row) {
+      var newResult = result.rows ? result.rows : result;
+
+      if (Array.isArray(newResult)) {
+        newResult = newResult.map(function (row) {
           return convertKeysMiddleware(row);
         });
+
+        if (queryContext && (queryContext.limit === 1 || queryContext.limit === '1')) {
+          var _newResult = newResult;
+
+          var _newResult2 = (0, _slicedToArray2["default"])(_newResult, 1);
+
+          newResult = _newResult2[0];
+        }
       } else {
-        return convertKeysMiddleware(result);
+        newResult = convertKeysMiddleware(result);
       }
+
+      return newResult;
     }
   });
 };

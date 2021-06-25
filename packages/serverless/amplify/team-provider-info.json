@@ -36,6 +36,18 @@
       "StackName": "amplify-serverlessromeu-dev-153104",
       "StackId": "arn:aws:cloudformation:us-east-1:357003500481:stack/amplify-serverlessromeu-dev-153104/58beefa0-d063-11eb-9a79-0ef4281dfc4d",
       "AmplifyAppId": "d2ujuacetigk5z"
+    },
+    "categories": {
+      "function": {
+        "fetchUserRomeu": {
+          "deploymentBucketName": "amplify-serverlessromeu-dev-153104-deployment",
+          "s3Key": "amplify-builds/fetchUserRomeu-6e313934544c394b464a-build.zip"
+        },
+        "serverlessromeuconnectorsRomeu": {
+          "deploymentBucketName": "amplify-serverlessromeu-dev-153104-deployment",
+          "s3Key": "amplify-builds/serverlessromeuconnectorsRomeu-LambdaLayerVersion0563c6a1-build.zip"
+        }
+      }
     }
   }
 }

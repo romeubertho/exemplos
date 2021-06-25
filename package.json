@@ -19,7 +19,9 @@
   },
   "workspaces": {
     "packages": [
-      "packages/*"
+      "packages/*",
+      "packages/serverless/amplify/backend/function/*/src",
+      "packages/serverless/amplify/backend/function/*/lib/nodejs"
     ]
   },
   "devDependencies": {

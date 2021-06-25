@@ -1,1 +1,15 @@
-{}
+{
+  "function": {
+    "fetchUserRomeu": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": []
+    },
+    "serverlessromeuconnectorsRomeu": {
+      "providerPlugin": "awscloudformation",
+      "service": "LambdaLayer",
+      "build": true
+    }
+  }
+}
